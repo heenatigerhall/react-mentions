@@ -1,6 +1,6 @@
 import invariant from 'invariant'
 
-const combineRegExps = regExps => {
+const combineRegExps = (regExps: RegExp[]): RegExp => {
   const serializedRegexParser = /^\/(.+)\/(\w+)?$/
   return new RegExp(
     regExps

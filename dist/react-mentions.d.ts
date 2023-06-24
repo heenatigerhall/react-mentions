@@ -166,6 +166,14 @@ declare module "Typescript/Mention/Mention" {
 declare module "Typescript/types/index" {
     export * from "Typescript/types/types";
 }
+declare module "utils/combineRegExps" {
+    const combineRegExps: (regExps: RegExp[]) => RegExp;
+    export default combineRegExps;
+}
+declare module "utils/countPlaceholders" {
+    const countPlaceholders: (markup: string) => number;
+    export default countPlaceholders;
+}
 declare module "utils/escapeRegex" {
     const escapeRegex: (str: string) => string;
     export default escapeRegex;

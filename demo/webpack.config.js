@@ -36,14 +36,27 @@ module.exports = {
     new HTMLWebpackHarddiskPlugin(),
   ],
   resolve: {
-    extensions: ['.js', '.css'],
+    extensions: ['.js', '.css', '.jsx', '.ts', '.tsx'],
   },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.js$|jsx/,
         exclude: /node_modules/,
         loader: 'babel-loader',
+        options: {
+          // happyPackMode: true,
+          presets: ['@babel/preset-react', "@babel/preset-typescript"]
+        }
+      },
+      {
+        test: /\.([cm]?ts|tsx)$/,
+        exclude: /node_modules/,
+        loader: 'ts-loader',
+        options: { happyPackMode: true, compilerOptions: { noEmit: false, } }
+        // options: {
+        //   presets: ['@babel/preset-react', "@babel/preset-typescript"]
+        // }
       },
       {
         test: /\.css$/,
