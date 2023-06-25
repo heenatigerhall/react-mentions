@@ -1,5 +1,5 @@
-import * as React from 'react'
-import { lineStyle } from '../style'
+import * as React from 'react';
+import { lineStyle } from '../style';
 
 export function LoadingUserItem() {
   return (
@@ -8,6 +8,7 @@ export function LoadingUserItem() {
         display: 'flex',
         padding: '1rem',
         alignItems: 'center',
+        background: 'pink'
       }}
     >
       <div
@@ -17,14 +18,14 @@ export function LoadingUserItem() {
           width: '2rem',
           height: '2rem',
           borderRadius: '50%',
-          animation: lineStyle.animation,
+          animation: lineStyle.animation
         }}
       />
       <div
         style={{
           display: 'block',
           alignItems: 'center',
-          marginLeft: '0.5rem',
+          marginLeft: '0.5rem'
         }}
       >
         <div style={{ ...lineStyle, width: '12rem' }} />
@@ -32,5 +33,5 @@ export function LoadingUserItem() {
         <div style={{ ...lineStyle, width: '8rem' }} />
       </div>
     </div>
-  )
+  );
 }

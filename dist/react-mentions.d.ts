@@ -230,7 +230,7 @@ declare module "typescript/LoadingIndicator/components/index" {
 declare module "typescript/LoadingIndicator/LoadingIndicator" {
     import React from 'react';
     import useStyles from 'substyle';
-    export function LoadingIndicator({ style, className, classNames, }: useStyles.StylingProps): React.JSX.Element;
+    export function LoadingIndicator({ style, className, classNames }: useStyles.StylingProps): React.JSX.Element;
 }
 declare module "typescript/LoadingIndicator/types" {
     export interface LoadingIndictorProps {

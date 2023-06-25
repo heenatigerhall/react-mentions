@@ -67,10 +67,10 @@ function kr() {
       {
         var F = B.ReactDebugCurrentFrame, W = F.getStackAddendum();
         W !== "" && (d += "%s", v = v.concat([W]));
-        var K = v.map(function(k) {
+        var V = v.map(function(k) {
           return String(k);
         });
-        K.unshift("Warning: " + d), Function.prototype.apply.call(console[s], console, K);
+        V.unshift("Warning: " + d), Function.prototype.apply.call(console[s], console, V);
       }
     }
     var U = !1, E = !1, J = !1, ee = !1, oe = !1, ie;
@@ -92,7 +92,7 @@ function kr() {
     function G(s) {
       return s.displayName || "Context";
     }
-    function V(s) {
+    function z(s) {
       if (s == null)
         return null;
       if (typeof s.tag == "number" && M("Received an unexpected object in getComponentNameFromType(). This is likely a bug in React. Please file an issue."), typeof s == "function")
@@ -125,11 +125,11 @@ function kr() {
             return q(s, s.render, "ForwardRef");
           case g:
             var F = s.displayName || null;
-            return F !== null ? F : V(s.type) || "Memo";
+            return F !== null ? F : z(s.type) || "Memo";
           case h: {
-            var W = s, K = W._payload, k = W._init;
+            var W = s, V = W._payload, k = W._init;
             try {
-              return V(k(K));
+              return z(k(V));
             } catch {
               return null;
             }
@@ -230,8 +230,8 @@ function kr() {
       N = !0;
       var W = Error.prepareStackTrace;
       Error.prepareStackTrace = void 0;
-      var K;
-      K = P.current, P.current = null, T();
+      var V;
+      V = P.current, P.current = null, T();
       try {
         if (d) {
           var k = function() {
@@ -284,7 +284,7 @@ function kr() {
             }
         }
       } finally {
-        N = !1, P.current = K, L(), Error.prepareStackTrace = W;
+        N = !1, P.current = V, L(), Error.prepareStackTrace = W;
       }
       var Se = s ? s.displayName || s.name : "", Dt = Se ? w(Se) : "";
       return typeof s == "function" && j.set(s, Dt), Dt;
@@ -316,9 +316,9 @@ function kr() {
           case g:
             return ve(s.type, d, v);
           case h: {
-            var F = s, W = F._payload, K = F._init;
+            var F = s, W = F._payload, V = F._init;
             try {
-              return ve(K(W), d, v);
+              return ve(V(W), d, v);
             } catch {
             }
           }
@@ -335,9 +335,9 @@ function kr() {
     }
     function cr(s, d, v, F, W) {
       {
-        var K = Function.call.bind(ke);
+        var V = Function.call.bind(ke);
         for (var k in s)
-          if (K(s, k)) {
+          if (V(s, k)) {
             var $ = void 0;
             try {
               if (typeof s[k] != "function") {
@@ -401,8 +401,8 @@ function kr() {
     }
     function vr(s, d) {
       if (typeof s.ref == "string" && _e.current && d && _e.current.stateNode !== d) {
-        var v = V(_e.current.type);
-        Je[v] || (M('Component "%s" contains the string ref "%s". Support for string refs will be removed in a future major release. This case cannot be automatically converted to an arrow function. We ask you to manually fix this case by using useRef() or createRef() instead. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-string-ref', V(_e.current.type), s.ref), Je[v] = !0);
+        var v = z(_e.current.type);
+        Je[v] || (M('Component "%s" contains the string ref "%s". Support for string refs will be removed in a future major release. This case cannot be automatically converted to an arrow function. We ask you to manually fix this case by using useRef() or createRef() instead. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-string-ref', z(_e.current.type), s.ref), Je[v] = !0);
       }
     }
     function yr(s, d) {
@@ -427,7 +427,7 @@ function kr() {
         });
       }
     }
-    var br = function(s, d, v, F, W, K, k) {
+    var br = function(s, d, v, F, W, V, k) {
       var $ = {
         // This tag allows us to uniquely identify this as a React Element
         $$typeof: n,
@@ -437,7 +437,7 @@ function kr() {
         ref: v,
         props: k,
         // Record the component responsible for creating this element.
-        _owner: K
+        _owner: V
       };
       return $._store = {}, Object.defineProperty($._store, "validated", {
         configurable: !1,
@@ -458,14 +458,14 @@ function kr() {
     };
     function Cr(s, d, v, F, W) {
       {
-        var K, k = {}, $ = null, ne = null;
+        var V, k = {}, $ = null, ne = null;
         v !== void 0 && (yt(v), $ = "" + v), Er(d) && (yt(d.key), $ = "" + d.key), hr(d) && (ne = d.ref, vr(d, W));
-        for (K in d)
-          ke.call(d, K) && !gr.hasOwnProperty(K) && (k[K] = d[K]);
+        for (V in d)
+          ke.call(d, V) && !gr.hasOwnProperty(V) && (k[V] = d[V]);
         if (s && s.defaultProps) {
           var Q = s.defaultProps;
-          for (K in Q)
-            k[K] === void 0 && (k[K] = Q[K]);
+          for (V in Q)
+            k[V] === void 0 && (k[V] = Q[V]);
         }
         if ($ || ne) {
           var Z = typeof s == "function" ? s.displayName || s.name || "Unknown" : s;
@@ -490,7 +490,7 @@ function kr() {
     function St() {
       {
         if (Ge.current) {
-          var s = V(Ge.current.type);
+          var s = z(Ge.current.type);
           if (s)
             return `
 
@@ -533,7 +533,7 @@ Check the top-level render call using <` + v + ">.");
           return;
         At[v] = !0;
         var F = "";
-        s && s._owner && s._owner !== Ge.current && (F = " It was passed a child from " + V(s._owner.type) + "."), Ce(s), M('Each child in a list should have a unique "key" prop.%s%s See https://reactjs.org/link/warning-keys for more information.', v, F), Ce(null);
+        s && s._owner && s._owner !== Ge.current && (F = " It was passed a child from " + z(s._owner.type) + "."), Ce(s), M('Each child in a list should have a unique "key" prop.%s%s See https://reactjs.org/link/warning-keys for more information.', v, F), Ce(null);
       }
     }
     function Ft(s, d) {
@@ -550,7 +550,7 @@ Check the top-level render call using <` + v + ">.");
         else if (s) {
           var W = D(s);
           if (typeof W == "function" && W !== s.entries)
-            for (var K = W.call(s), k; !(k = K.next()).done; )
+            for (var V = W.call(s), k; !(k = V.next()).done; )
               Qe(k.value) && Ot(k.value, d);
         }
       }
@@ -570,11 +570,11 @@ Check the top-level render call using <` + v + ">.");
         else
           return;
         if (v) {
-          var F = V(d);
+          var F = z(d);
           cr(v, s.props, "prop", F, s);
         } else if (d.PropTypes !== void 0 && !Xe) {
           Xe = !0;
-          var W = V(d);
+          var W = z(d);
           M("Component %s declared `PropTypes` instead of `propTypes`. Did you misspell the property assignment?", W || "Unknown");
         }
         typeof d.getDefaultProps == "function" && !d.getDefaultProps.isReactClassApproved && M("getDefaultProps is only used on classic React.createClass definitions. Use a static property named `defaultProps` instead.");
@@ -592,7 +592,7 @@ Check the top-level render call using <` + v + ">.");
         s.ref !== null && (Ce(s), M("Invalid attribute `ref` supplied to `React.Fragment`."), Ce(null));
       }
     }
-    function Tt(s, d, v, F, W, K) {
+    function Tt(s, d, v, F, W, V) {
       {
         var k = fe(s);
         if (!k) {
@@ -601,9 +601,9 @@ Check the top-level render call using <` + v + ">.");
           var ne = Sr(W);
           ne ? $ += ne : $ += St();
           var Q;
-          s === null ? Q = "null" : Ke(s) ? Q = "array" : s !== void 0 && s.$$typeof === n ? (Q = "<" + (V(s.type) || "Unknown") + " />", $ = " Did you accidentally export a JSX literal instead of a component?") : Q = typeof s, M("React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", Q, $);
+          s === null ? Q = "null" : Ke(s) ? Q = "array" : s !== void 0 && s.$$typeof === n ? (Q = "<" + (z(s.type) || "Unknown") + " />", $ = " Did you accidentally export a JSX literal instead of a component?") : Q = typeof s, M("React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", Q, $);
         }
-        var Z = Cr(s, d, v, W, K);
+        var Z = Cr(s, d, v, W, V);
         if (Z == null)
           return Z;
         if (k) {
@@ -633,7 +633,7 @@ Check the top-level render call using <` + v + ">.");
   }()), we;
 }
 process.env.NODE_ENV === "production" ? ot.exports = Lr() : ot.exports = kr();
-var z = ot.exports, Nr = function(t, n, e, r, u, o, a, i) {
+var K = ot.exports, Nr = function(t, n, e, r, u, o, a, i) {
   if (process.env.NODE_ENV !== "production" && n === void 0)
     throw new Error("invariant requires an error message argument");
   if (!t) {
@@ -1474,7 +1474,7 @@ function Ve(t, n) {
         { style: a, className: i, classNames: l },
         f
       );
-      return /* @__PURE__ */ z.jsx(r, { ...c, style: g });
+      return /* @__PURE__ */ K.jsx(r, { ...c, style: g });
     }, o = r.displayName || r.name || "Component";
     return u.displayName = `defaultStyle(${o})`, Te.forwardRef((a, i) => u({ ...a, ref: i }));
   };
@@ -1523,15 +1523,15 @@ function Fn({
       m.push(O(J, D));
     D++;
   }, M = (J, ee, oe, ie, fe, q, G) => {
-    const V = On(S, ie);
+    const z = On(S, ie);
     m.push(
-      U(ie, fe, q, V)
+      U(ie, fe, q, z)
     );
   }, O = (J, ee) => /* @__PURE__ */ Pt("span", { ...a("substring"), key: ee }, J), U = (J, ee, oe, ie) => {
     const fe = { id: J, display: ee, key: ie }, q = Re.Children.toArray(o)[oe];
     return Re.cloneElement(q, fe);
   }, E = (J) => /* @__PURE__ */ Pt("span", { ...a("caret"), ref: f, key: "caret" }, J);
-  return Le(e, g, M, B), m.push(" "), m !== C && C.push(E(m)), /* @__PURE__ */ z.jsx("div", { ...a, ref: u, children: C });
+  return Le(e, g, M, B), m.push(" "), m !== C && C.push(E(m)), /* @__PURE__ */ K.jsx("div", { ...a, ref: u, children: C });
 }
 const Tn = Ve(
   {
@@ -1681,7 +1681,7 @@ function _n() {
         }
       }
     }
-    var E = l, J = c, ee = i, oe = a, ie = n, fe = f, q = r, G = S, V = C, X = e, ue = o, te = u, ae = g, Ee = !1;
+    var E = l, J = c, ee = i, oe = a, ie = n, fe = f, q = r, G = S, z = C, X = e, ue = o, te = u, ae = g, Ee = !1;
     function me(y) {
       return Ee || (Ee = !0, console.warn("The ReactIs.isAsyncMode() alias has been deprecated, and will be removed in React 17+. Update your code to use ReactIs.isConcurrentMode() instead. It has the exact same API.")), p(y) || U(y) === l;
     }
@@ -1721,7 +1721,7 @@ function _n() {
     function re(y) {
       return U(y) === g;
     }
-    H.AsyncMode = E, H.ConcurrentMode = J, H.ContextConsumer = ee, H.ContextProvider = oe, H.Element = ie, H.ForwardRef = fe, H.Fragment = q, H.Lazy = G, H.Memo = V, H.Portal = X, H.Profiler = ue, H.StrictMode = te, H.Suspense = ae, H.isAsyncMode = me, H.isConcurrentMode = p, H.isContextConsumer = b, H.isContextProvider = x, H.isElement = R, H.isForwardRef = T, H.isFragment = L, H.isLazy = P, H.isMemo = _, H.isPortal = w, H.isProfiler = N, H.isStrictMode = j, H.isSuspense = re, H.isValidElementType = O, H.typeOf = U;
+    H.AsyncMode = E, H.ConcurrentMode = J, H.ContextConsumer = ee, H.ContextProvider = oe, H.Element = ie, H.ForwardRef = fe, H.Fragment = q, H.Lazy = G, H.Memo = z, H.Portal = X, H.Profiler = ue, H.StrictMode = te, H.Suspense = ae, H.isAsyncMode = me, H.isConcurrentMode = p, H.isContextConsumer = b, H.isContextProvider = x, H.isElement = R, H.isForwardRef = T, H.isFragment = L, H.isLazy = P, H.isMemo = _, H.isPortal = w, H.isProfiler = N, H.isStrictMode = j, H.isSuspense = re, H.isValidElementType = O, H.typeOf = U;
   }()), H;
 }
 var Wt;
@@ -1886,7 +1886,7 @@ function wn() {
       oneOf: ee,
       oneOfType: ie,
       shape: G,
-      exact: V
+      exact: z
     };
     function S(p, b) {
       return p === b ? p !== 0 || 1 / p === 1 / b : p !== p && b !== b;
@@ -2069,7 +2069,7 @@ function wn() {
       }
       return D(b);
     }
-    function V(p) {
+    function z(p) {
       function b(x, R, T, L, P) {
         var _ = x[R], w = te(_);
         if (w !== "object")
@@ -2248,13 +2248,13 @@ function ar({
     return S === void 0 || !m ? S : m;
   }, C = (S) => {
     let m = Qt(S, a, e);
-    return m === -1 ? /* @__PURE__ */ z.jsx("span", { ...c("display"), children: S }) : /* @__PURE__ */ z.jsxs("span", { ...c("display"), children: [
+    return m === -1 ? /* @__PURE__ */ K.jsx("span", { ...c("display"), children: S }) : /* @__PURE__ */ K.jsxs("span", { ...c("display"), children: [
       S.substring(0, m),
-      /* @__PURE__ */ z.jsx("b", { ...c("highlight"), children: S.substring(m, m + a.length) }),
+      /* @__PURE__ */ K.jsx("b", { ...c("highlight"), children: S.substring(m, m + a.length) }),
       S.substring(m + a.length)
     ] });
   };
-  return /* @__PURE__ */ z.jsx("li", { id: t, role: "option", "aria-selected": n, ...f, ...c, children: g() });
+  return /* @__PURE__ */ K.jsx("li", { id: t, role: "option", "aria-selected": n, ...f, ...c, children: g() });
 }
 ar.propTypes = {
   id: A.string.isRequired,
@@ -2286,16 +2286,17 @@ const Bn = Ve(
   amimationFillMode: "forwards"
 };
 function kn() {
-  return /* @__PURE__ */ z.jsxs(
+  return /* @__PURE__ */ K.jsxs(
     "div",
     {
       style: {
         display: "flex",
         padding: "1rem",
-        alignItems: "center"
+        alignItems: "center",
+        background: "pink"
       },
       children: [
-        /* @__PURE__ */ z.jsx(
+        /* @__PURE__ */ K.jsx(
           "div",
           {
             style: {
@@ -2308,7 +2309,7 @@ function kn() {
             }
           }
         ),
-        /* @__PURE__ */ z.jsxs(
+        /* @__PURE__ */ K.jsxs(
           "div",
           {
             style: {
@@ -2317,9 +2318,9 @@ function kn() {
               marginLeft: "0.5rem"
             },
             children: [
-              /* @__PURE__ */ z.jsx("div", { style: { ...Oe, width: "12rem" } }),
-              /* @__PURE__ */ z.jsx("div", { style: { ...Oe, width: "10rem" } }),
-              /* @__PURE__ */ z.jsx("div", { style: { ...Oe, width: "8rem" } })
+              /* @__PURE__ */ K.jsx("div", { style: { ...Oe, width: "12rem" } }),
+              /* @__PURE__ */ K.jsx("div", { style: { ...Oe, width: "10rem" } }),
+              /* @__PURE__ */ K.jsx("div", { style: { ...Oe, width: "8rem" } })
             ]
           }
         )
@@ -2333,7 +2334,7 @@ function Nn({
   classNames: e
 }) {
   const r = pt(Wn, { style: t, className: n, classNames: e }), u = r("spinner");
-  return /* @__PURE__ */ z.jsx("div", { ...r, children: /* @__PURE__ */ z.jsx("div", { ...u, children: /* @__PURE__ */ z.jsx(z.Fragment, { children: [...Array(4)].map((o) => /* @__PURE__ */ z.jsx(kn, {}, o)) }) }) });
+  return /* @__PURE__ */ K.jsx("div", { ...r, children: /* @__PURE__ */ K.jsx("div", { ...u, children: [...Array(4)].map((o) => /* @__PURE__ */ K.jsx(kn, {}, o)) }) });
 }
 const Wn = {};
 function lr({
@@ -2362,12 +2363,12 @@ function lr({
     if (!O || O.offsetHeight >= O.scrollHeight || !l)
       return;
     const q = O.scrollTop;
-    let { top: G, bottom: V } = O.children[r].getBoundingClientRect();
+    let { top: G, bottom: z } = O.children[r].getBoundingClientRect();
     const { top: X } = O.getBoundingClientRect();
-    G = G - X + q, V = V - X + q, G < q ? O.scrollTop = G : V > O.offsetHeight && (O.scrollTop = V - O.offsetHeight);
+    G = G - X + q, z = z - X + q, G < q ? O.scrollTop = G : z > O.offsetHeight && (O.scrollTop = z - O.offsetHeight);
   }, [r, l, O]);
   const E = () => {
-    const q = /* @__PURE__ */ z.jsx(
+    const q = /* @__PURE__ */ K.jsx(
       "ul",
       {
         ref: U,
@@ -2376,9 +2377,9 @@ function lr({
         "aria-label": e,
         ...m("list"),
         children: Object.values(n).reduce(
-          (G, { results: V, queryInfo: X }) => [
+          (G, { results: z, queryInfo: X }) => [
             ...G,
-            ...V.map(
+            ...z.map(
               (ue, te) => J(ue, X, G.length + te)
             )
           ],
@@ -2387,33 +2388,33 @@ function lr({
       }
     );
     return D ? D(q) : q;
-  }, J = (q, G, V) => {
-    const X = V === r, { childIndex: ue, query: te } = G, { renderSuggestion: ae } = ze.toArray(S)[ue].props;
-    return /* @__PURE__ */ z.jsx(
+  }, J = (q, G, z) => {
+    const X = z === r, { childIndex: ue, query: te } = G, { renderSuggestion: ae } = ze.toArray(S)[ue].props;
+    return /* @__PURE__ */ K.jsx(
       Ln,
       {
         style: m("item"),
-        id: Xt(t, V),
+        id: Xt(t, z),
         query: te,
-        index: V,
+        index: z,
         ignoreAccents: h,
         renderSuggestion: ae,
         suggestion: q,
         focused: X,
         onClick: () => ie(q, G),
-        onMouseEnter: () => oe(V)
+        onMouseEnter: () => oe(z)
       },
       `${ue}-${fe(q)}`
     );
   }, ee = () => {
     if (c)
-      return /* @__PURE__ */ z.jsx(Nn, { style: m("loadingIndicator") });
+      return /* @__PURE__ */ K.jsx(Nn, { style: m("loadingIndicator") });
   }, oe = (q, G) => {
     M && M(q);
   }, ie = (q, G) => {
     g(q, G);
   }, fe = (q) => typeof q == "string" ? q : q.id;
-  return f ? /* @__PURE__ */ z.jsxs(
+  return f ? /* @__PURE__ */ K.jsxs(
     "div",
     {
       ...Sn({ position: u || "absolute", left: o, right: a, top: i }, m),
@@ -2548,13 +2549,13 @@ class ft extends Te.Component {
     });
     I(this, "renderControl", () => {
       let { singleLine: e, style: r } = this.props, u = this.getInputProps();
-      return /* @__PURE__ */ z.jsxs("div", { ...r("control"), children: [
+      return /* @__PURE__ */ K.jsxs("div", { ...r("control"), children: [
         this.renderHighlighter(),
         e ? this.renderInput(u) : this.renderTextarea(u)
       ] });
     });
-    I(this, "renderInput", (e) => /* @__PURE__ */ z.jsx("input", { type: "text", ref: this.setInputRef, ...e }));
-    I(this, "renderTextarea", (e) => /* @__PURE__ */ z.jsx("textarea", { autoFocus: !0, ref: this.setInputRef, ...e }));
+    I(this, "renderInput", (e) => /* @__PURE__ */ K.jsx("input", { type: "text", ref: this.setInputRef, ...e }));
+    I(this, "renderTextarea", (e) => /* @__PURE__ */ K.jsx("textarea", { autoFocus: !0, ref: this.setInputRef, ...e }));
     I(this, "setInputRef", (e) => {
       this.inputElement = e;
       const { inputRef: r } = this.props;
@@ -2566,7 +2567,7 @@ class ft extends Te.Component {
     I(this, "renderSuggestionsOverlay", () => {
       if (!it(this.state.selectionStart))
         return null;
-      const { position: e, left: r, top: u, right: o } = this.state.suggestionsPosition, a = /* @__PURE__ */ z.jsx(
+      const { position: e, left: r, top: u, right: o } = this.state.suggestionsPosition, a = /* @__PURE__ */ K.jsx(
         Hn,
         {
           id: this.uuidSuggestionsOverlay,
@@ -2597,7 +2598,7 @@ class ft extends Te.Component {
     });
     I(this, "renderHighlighter", () => {
       const { selectionStart: e, selectionEnd: r } = this.state, { singleLine: u, children: o, value: a, style: i } = this.props;
-      return /* @__PURE__ */ z.jsx(
+      return /* @__PURE__ */ K.jsx(
         Dn,
         {
           containerRef: this.setHighlighterElement,
@@ -2933,7 +2934,7 @@ class ft extends Te.Component {
     document.removeEventListener("copy", this.handleCopy), document.removeEventListener("cut", this.handleCut), document.removeEventListener("paste", this.handlePaste);
   }
   render() {
-    return /* @__PURE__ */ z.jsxs("div", { ref: this.setContainerElement, ...this.props.style, children: [
+    return /* @__PURE__ */ K.jsxs("div", { ref: this.setContainerElement, ...this.props.style, children: [
       this.renderControl(),
       this.renderSuggestionsOverlay()
     ] });
@@ -3071,7 +3072,7 @@ const ut = (t, n) => {
   classNames: r
 }) => {
   const u = pt(Kn, { style: n, className: e, classNames: r });
-  return /* @__PURE__ */ z.jsx("strong", { ...u, children: t });
+  return /* @__PURE__ */ K.jsx("strong", { ...u, children: t });
 };
 Jn.defaultProps = {
   trigger: "@",
