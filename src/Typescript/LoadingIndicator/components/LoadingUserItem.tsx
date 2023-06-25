@@ -7,8 +7,7 @@ export function LoadingUserItem() {
       style={{
         display: 'flex',
         padding: '1rem',
-        alignItems: 'center',
-        background: 'pink'
+        alignItems: 'center'
       }}
     >
       <div

@@ -11,7 +11,7 @@ export function LoadingIndicator({
   const spinnerStyles = styles('spinner');
 
   return (
-    <div {...styles}>
+    <div style={{ borderRadius: '0.5rem' }} {...styles}>
       <div {...spinnerStyles}>
         {[...Array(4)].map((ele) => (
           <LoadingUserItem key={ele} />
