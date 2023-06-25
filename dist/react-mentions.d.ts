@@ -1,19 +1,4 @@
 /// <reference types="react" />
-declare module "typescript/types/highlighter" {
-    export interface CaretPosition {
-        left: string | number;
-        top: string | number;
-    }
-    export interface HighlighterProps {
-        selectionStart: number;
-        selectionEnd: number;
-        value: string;
-        onCaretPositionChange: (ele: CaretPosition) => void;
-        containerRef: any;
-        children: React.ReactNode | React.ReactNode[];
-        style: any;
-    }
-}
 declare module "utils/ts/combineRegExps" {
     export const combineRegExps: (regExps: RegExp[]) => RegExp;
 }
@@ -145,6 +130,21 @@ declare module "typescript/types/types" {
      */
     export type DataFunc = (query: string, callback: (data: SuggestionDataItem[]) => void) => Promise<void> | void | Promise<SuggestionDataItem[]> | SuggestionDataItem[];
 }
+declare module "typescript/types/highlighter" {
+    export interface CaretPosition {
+        left: string | number;
+        top: string | number;
+    }
+    export interface HighlighterProps {
+        selectionStart: number;
+        selectionEnd: number;
+        value: string;
+        onCaretPositionChange: (ele: CaretPosition) => void;
+        containerRef: any;
+        children: React.ReactNode | React.ReactNode[];
+        style: any;
+    }
+}
 declare module "typescript/types/suggestion" {
     export interface SuggestionProps {
         id: string;
@@ -201,12 +201,100 @@ declare module "utils/ts/index" {
     export * from "utils/ts/spliceString";
     export * from "utils/ts/highlighter";
 }
+declare module "utils/iterateMentionsMarkup" {
+    export const iterateMentionsMarkup: (value: string, config: any, markupIteratee: any, textIteratee?: any) => void;
+}
+declare module "utils/getPlainText" {
+    export function getPlainText(value: any, config: any): string;
+}
+declare module "utils/mapPlainTextIndex" {
+    export function mapPlainTextIndex(value: any, config: any, indexInPlainText: any, inMarkupCorrection?: string): any;
+}
+declare module "utils/applyChangeToValue" {
+    export function applyChangeToValue(value: any, plainTextValue: any, { selectionStartBefore, selectionEndBefore, selectionEndAfter }: {
+        selectionStartBefore: any;
+        selectionEndBefore: any;
+        selectionEndAfter: any;
+    }, config: any): string;
+}
+declare module "utils/findStartOfMentionInPlainText" {
+    export function findStartOfMentionInPlainText(value: any, config: any, indexInPlainText: any): any;
+}
+declare module "utils/getMentions" {
+    export function getMentions(value: any, config: any): any[];
+}
+declare module "utils/getSuggestionHtmlId" {
+    export function getSuggestionHtmlId(prefix: any, id: any): string;
+}
+declare module "utils/countSuggestions" {
+    export function countSuggestions(suggestions: any): any;
+}
+declare module "utils/getEndOfLastMention" {
+    export function getEndOfLastMention(value: any, config: any): any;
+}
+declare module "utils/diacritics" {
+    export const lettersDiacritics: {
+        base: string;
+        letters: RegExp;
+    }[];
+}
+declare module "utils/getSubstringIndex" {
+    export function removeAccents(str: any): any;
+    export function normalizeString(str: any): any;
+    export function getSubstringIndex(str: any, substr: any, ignoreAccents: any): any;
+}
+declare module "utils/isIE" {
+    export function isIE(): boolean;
+}
+declare module "utils/isNumber" {
+    export function isNumber(val: any): boolean;
+}
+declare module "utils/isPlainObject" {
+    export function isPlainObject(obj: any): boolean;
+}
+declare module "utils/keys" {
+    export function keys(obj: any): string[];
+}
+declare module "utils/mergeDeep" {
+    export function mergeDeep(target: any, source: any): any;
+}
+declare module "utils/merge" {
+    export function merge(target: any, ...sources: any[]): any;
+}
+declare module "utils/omit" {
+    export function omit(obj: any, ...rest: any[]): {};
+}
+declare module "utils/defaultStyle" {
+    export function createDefaultStyle(defaultStyle: any, getModifiers: any): (ComponentToWrap: any) => React.ForwardRefExoticComponent<React.RefAttributes<any>>;
+    import React from "react";
+}
+declare module "utils/index" {
+    export { getPlainText } from "./getPlainText";
+    export { applyChangeToValue } from "./applyChangeToValue";
+    export { findStartOfMentionInPlainText } from "./findStartOfMentionInPlainText";
+    export { getMentions } from "./getMentions";
+    export { getSuggestionHtmlId } from "./getSuggestionHtmlId";
+    export { countSuggestions } from "./countSuggestions";
+    export { getEndOfLastMention } from "./getEndOfLastMention";
+    export { mapPlainTextIndex } from "./mapPlainTextIndex";
+    export { iterateMentionsMarkup } from "./iterateMentionsMarkup";
+    export { getSubstringIndex } from "./getSubstringIndex";
+    export { isIE } from "./isIE";
+    export { isNumber } from "./isNumber";
+    export { merge } from "./merge";
+    export { omit } from "./omit";
+    export { keys } from "./keys";
+    export { createDefaultStyle as defaultStyle } from "./defaultStyle";
+    export * from "utils/ts";
+}
 declare module "Highlighter" {
-    const _default: any;
+    import * as React from 'react';
+    const _default: React.ForwardRefExoticComponent<React.RefAttributes<any>>;
     export default _default;
 }
 declare module "Suggestion" {
-    const _default_1: any;
+    import React from 'react';
+    const _default_1: React.ForwardRefExoticComponent<React.RefAttributes<any>>;
     export default _default_1;
 }
 declare module "typescript/LoadingIndicator/style" {
@@ -244,6 +332,17 @@ declare module "typescript/LoadingIndicator/index" {
 declare module "typescript/index" {
     export * from "typescript/LoadingIndicator/index";
 }
+declare module "SuggestionsOverlay" {
+    const _default: React.ForwardRefExoticComponent<React.RefAttributes<any>>;
+    export default _default;
+    import React from "react";
+}
+declare module "MentionsInput" {
+    export function makeTriggerRegex(trigger: any, options?: {}): RegExp;
+    const _default: React.ForwardRefExoticComponent<React.RefAttributes<any>>;
+    export default _default;
+    import React from "react";
+}
 declare module "typescript/Mention/Mention" {
     import React from 'react';
     import useStyles from 'substyle';
@@ -265,4 +364,65 @@ declare module "typescript/Mention/Mention" {
         };
     };
     export default Mention;
+}
+declare module "index" {
+    export { default as MentionsInput } from "./MentionsInput";
+    export { default as Mention } from "./typescript/Mention/Mention";
+}
+declare module "tests/MentionsInput.spec" {
+    export {};
+}
+declare module "utils/tests/applyChangeToValue.spec" {
+    export {};
+}
+declare module "utils/tests/combineRegExps.spec" {
+    export {};
+}
+declare module "utils/tests/findPositionOfCapturingGroup.spec" {
+    export {};
+}
+declare module "utils/tests/findStartOfMentionInPlainText.spec" {
+    export {};
+}
+declare module "utils/tests/getEndOfLastMention.spec" {
+    export {};
+}
+declare module "utils/tests/getMentions.spec" {
+    export {};
+}
+declare module "utils/tests/getPlainText.spec" {
+    export {};
+}
+declare module "utils/tests/getSubstringIndex.spec" {
+    export {};
+}
+declare module "utils/tests/getSuggestionHtmlId.spec" {
+    export {};
+}
+declare module "utils/tests/isNumber.spec" {
+    export {};
+}
+declare module "utils/tests/isPlainObject.spec" {
+    export {};
+}
+declare module "utils/tests/iterateMentionsMarkup.spec" {
+    export {};
+}
+declare module "utils/tests/keys.spec" {
+    export {};
+}
+declare module "utils/tests/mapPlainTextIndex.spec" {
+    export {};
+}
+declare module "utils/tests/markupToRegex.spec" {
+    export {};
+}
+declare module "utils/tests/merge.spec" {
+    export {};
+}
+declare module "utils/tests/omit.spec" {
+    export {};
+}
+declare module "utils/tests/spliceString.spec" {
+    export {};
 }
