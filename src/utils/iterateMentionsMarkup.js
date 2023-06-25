@@ -26,7 +26,8 @@ export const iterateMentionsMarkup = (
 
   // detect all mention markup occurrences in the value and iterate the matches
   while ((match = regex.exec(value)) !== null) {
-    const offset = captureGroupOffsets.find(o => !!match[o]) // eslint-disable-line no-loop-func
+    // eslint-disable-line no-loop-func
+    const offset = captureGroupOffsets.find(o => !!match[o])
     const mentionChildIndex = captureGroupOffsets.indexOf(offset)
     const { markup, displayTransform } = config[mentionChildIndex]
     const idPos = offset + findPositionOfCapturingGroup(markup, 'id')
@@ -51,6 +52,8 @@ export const iterateMentionsMarkup = (
     currentPlainTextIndex += display.length
     start = regex.lastIndex
   }
+
+  console.log('asdf')
 
   if (start < value.length) {
     textIteratee(value.substring(start), start, currentPlainTextIndex)

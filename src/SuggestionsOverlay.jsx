@@ -1,4 +1,3 @@
-// @ts-check
 import React, { Children, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { inline } from 'substyle'

@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { defaultStyle } from './utils'
 import { getSubstringIndex } from './utils'
+import { getAllJSDocTagsOfKind } from 'typescript'
 
 function Suggestion({
   id,

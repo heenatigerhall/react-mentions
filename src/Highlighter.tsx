@@ -1,21 +1,34 @@
-import React, { Children, useState, useEffect } from 'react'
-import PropTypes from 'prop-types'
-import { defaultStyle } from './utils'
+import * as React from 'react';
+// import  { Children, useState, useEffect } from 'react'
+import PropTypes from 'prop-types';
+import { defaultStyle } from './utils';
 
 import {
   iterateMentionsMarkup,
   mapPlainTextIndex,
   readConfigFromChildren,
-  isNumber,
-} from './utils'
+  isNumber
+} from './utils';
+import { CaretPosition } from 'typescript/types/highlighter';
+import { notifyCaretPosition } from 'utils/ts';
 
 const _generateComponentKey = (usedKeys, id) => {
   if (!usedKeys.hasOwnProperty(id)) {
-    usedKeys[id] = 0
+    usedKeys[id] = 0;
   } else {
-    usedKeys[id]++
+    usedKeys[id]++;
   }
-  return id + '_' + usedKeys[id]
+  return id + '_' + usedKeys[id];
+};
+
+export interface HighlighterProps {
+  selectionStart: number;
+  selectionEnd: number;
+  value: string;
+  onCaretPositionChange: (ele: CaretPosition) => void;
+  containerRef: any;
+  children: React.ReactNode | React.ReactNode[];
+  style: any;
 }
 
 function Highlighter({
@@ -25,38 +38,20 @@ function Highlighter({
   onCaretPositionChange,
   containerRef,
   children,
-  singleLine,
-  style,
-}) {
-  const [position, setPosition] = useState({
+  style
+}: HighlighterProps) {
+  const [position, setPosition] = React.useState<CaretPosition>({
     left: undefined,
-    top: undefined,
-  })
-  const [caretElement, setCaretElement] = useState()
+    top: undefined
+  });
+  const [caretElement, setCaretElement] = React.useState();
 
-  useEffect(() => {
-    notifyCaretPosition()
-  })
+  React.useEffect(() => {
+    notifyCaretPosition({caretElement, position, setPosition, onCaretPositionChange});
+  });
 
-  const notifyCaretPosition = () => {
-    if (!caretElement) {
-      return
-    }
-
-    const { offsetLeft, offsetTop } = caretElement
-
-    if (position.left === offsetLeft && position.top === offsetTop) {
-      return
-    }
-
-    const newPosition = { left: offsetLeft, top: offsetTop }
-    setPosition(newPosition)
-
-    onCaretPositionChange(newPosition)
-  }
-
-  const config = readConfigFromChildren(children)
-  let caretPositionInMarkup
+  const config = readConfigFromChildren(children);
+  let caretPositionInMarkup;
 
   if (selectionEnd === selectionStart) {
     caretPositionInMarkup = mapPlainTextIndex(
@@ -64,15 +59,15 @@ function Highlighter({
       config,
       selectionStart,
       'START'
-    )
+    );
   }
 
-  const resultComponents = []
-  const componentKeys = {}
-  let components = resultComponents
-  let substringComponentKey = 0
+  const resultComponents = [];
+  const componentKeys = {};
+  let components = resultComponents;
+  let substringComponentKey = 0;
 
-  const textIteratee = (substr, index, indexInPlainText) => {
+  const textIteratee = (substr, index) => {
     // check whether the caret element has to be inserted inside the current plain substring
     if (
       isNumber(caretPositionInMarkup) &&
@@ -80,74 +75,79 @@ function Highlighter({
       caretPositionInMarkup <= index + substr.length
     ) {
       // if yes, split substr at the caret position and insert the caret component
-      const splitIndex = caretPositionInMarkup - index
+      const splitIndex = caretPositionInMarkup - index;
       components.push(
         renderSubstring(substr.substring(0, splitIndex), substringComponentKey)
-      )
+      );
       // add all following substrings and mention components as children of the caret component
       components = [
-        renderSubstring(substr.substring(splitIndex), substringComponentKey),
-      ]
+        renderSubstring(substr.substring(splitIndex), substringComponentKey)
+      ];
     } else {
-      components.push(renderSubstring(substr, substringComponentKey))
+      components.push(renderSubstring(substr, substringComponentKey));
     }
 
-    substringComponentKey++
-  }
+    substringComponentKey++;
+  };
 
   const mentionIteratee = (
-    markup,
-    index,
-    indexInPlainText,
+    _,
+    __,
+    ___,
     id,
     display,
     mentionChildIndex,
-    lastMentionEndIndex
+    ____
   ) => {
-    const key = _generateComponentKey(componentKeys, id)
+    const key = _generateComponentKey(componentKeys, id);
     components.push(
       getMentionComponentForMatch(id, display, mentionChildIndex, key)
-    )
-  }
+    );
+  };
 
-  const renderSubstring = (string, key) => {
+  const renderSubstring = (string: string, key: string | number) => {
     // set substring span to hidden, so that Emojis are not shown double in Mobile Safari
     return (
       <span {...style('substring')} key={key}>
         {string}
       </span>
-    )
-  }
+    );
+  };
 
-  const getMentionComponentForMatch = (id, display, mentionChildIndex, key) => {
-    const props = { id, display, key }
-    const child = Children.toArray(children)[mentionChildIndex]
-    return React.cloneElement(child, props)
-  }
+  const getMentionComponentForMatch = (
+    id: string,
+    display: string,
+    mentionChildIndex: number,
+    key: any
+  ) => {
+    const props = { id, display, key };
+    const child = React.Children.toArray(children)[mentionChildIndex];
+    return React.cloneElement(child as React.ReactElement, props);
+  };
 
-  const renderHighlighterCaret = (children) => {
+  const renderHighlighterCaret = (children: React.ReactNode) => {
     return (
       <span {...style('caret')} ref={setCaretElement} key="caret">
         {children}
       </span>
-    )
-  }
+    );
+  };
 
-  iterateMentionsMarkup(value, config, mentionIteratee, textIteratee)
+  iterateMentionsMarkup(value, config, mentionIteratee, textIteratee);
 
   // append a span containing a space, to ensure the last text line has the correct height
-  components.push(' ')
+  components.push(' ');
 
   if (components !== resultComponents) {
     // if a caret component is to be rendered, add all components that followed as its children
-    resultComponents.push(renderHighlighterCaret(components))
+    resultComponents.push(renderHighlighterCaret(components));
   }
 
   return (
     <div {...style} ref={containerRef}>
       {resultComponents}
     </div>
-  )
+  );
 }
 
 Highlighter.propTypes = {
@@ -161,14 +161,14 @@ Highlighter.propTypes = {
       current:
         typeof Element === 'undefined'
           ? PropTypes.any
-          : PropTypes.instanceOf(Element),
-    }),
+          : PropTypes.instanceOf(Element)
+    })
   ]),
   children: PropTypes.oneOfType([
     PropTypes.element,
-    PropTypes.arrayOf(PropTypes.element),
-  ]).isRequired,
-}
+    PropTypes.arrayOf(PropTypes.element)
+  ]).isRequired
+};
 
 const styled = defaultStyle(
   {
@@ -184,16 +184,16 @@ const styled = defaultStyle(
 
     '&singleLine': {
       whiteSpace: 'pre',
-      wordWrap: null,
+      wordWrap: null
     },
 
     substring: {
-      visibility: 'hidden',
-    },
+      visibility: 'hidden'
+    }
   },
   (props) => ({
-    '&singleLine': props.singleLine,
+    '&singleLine': props.singleLine
   })
-)
+);
 
-export default styled(Highlighter)
+export default styled(Highlighter);
