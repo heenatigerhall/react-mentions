@@ -1,6 +1,4 @@
 import * as React from 'react';
-// import  { Children, useState, useEffect } from 'react'
-import PropTypes from 'prop-types';
 import { defaultStyle } from './utils';
 
 import {
@@ -9,7 +7,7 @@ import {
   readConfigFromChildren,
   isNumber
 } from './utils';
-import { CaretPosition } from 'typescript/types/highlighter';
+import { CaretPosition, HighlighterProps } from 'typescript/types/highlighter';
 import { notifyCaretPosition } from 'utils/ts';
 
 const _generateComponentKey = (usedKeys, id) => {
@@ -20,16 +18,6 @@ const _generateComponentKey = (usedKeys, id) => {
   }
   return id + '_' + usedKeys[id];
 };
-
-export interface HighlighterProps {
-  selectionStart: number;
-  selectionEnd: number;
-  value: string;
-  onCaretPositionChange: (ele: CaretPosition) => void;
-  containerRef: any;
-  children: React.ReactNode | React.ReactNode[];
-  style: any;
-}
 
 function Highlighter({
   selectionStart,
@@ -47,7 +35,12 @@ function Highlighter({
   const [caretElement, setCaretElement] = React.useState();
 
   React.useEffect(() => {
-    notifyCaretPosition({caretElement, position, setPosition, onCaretPositionChange});
+    notifyCaretPosition({
+      caretElement,
+      position,
+      setPosition,
+      onCaretPositionChange
+    });
   });
 
   const config = readConfigFromChildren(children);
@@ -149,26 +142,6 @@ function Highlighter({
     </div>
   );
 }
-
-Highlighter.propTypes = {
-  selectionStart: PropTypes.number,
-  selectionEnd: PropTypes.number,
-  value: PropTypes.string.isRequired,
-  onCaretPositionChange: PropTypes.func.isRequired,
-  containerRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({
-      current:
-        typeof Element === 'undefined'
-          ? PropTypes.any
-          : PropTypes.instanceOf(Element)
-    })
-  ]),
-  children: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.arrayOf(PropTypes.element)
-  ]).isRequired
-};
 
 const styled = defaultStyle(
   {

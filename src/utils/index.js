@@ -1,19 +1,17 @@
-export { getPlainText } from './getPlainText'
-export { applyChangeToValue } from './applyChangeToValue'
-export {
-  findStartOfMentionInPlainText,
-} from './findStartOfMentionInPlainText'
-export { getMentions } from './getMentions'
-export { getSuggestionHtmlId } from './getSuggestionHtmlId'
-export { countSuggestions } from './countSuggestions'
-export { getEndOfLastMention } from './getEndOfLastMention'
-export { mapPlainTextIndex } from './mapPlainTextIndex'
-export { iterateMentionsMarkup } from './iterateMentionsMarkup'
-export { getSubstringIndex } from './getSubstringIndex'
-export { isIE } from './isIE'
-export { isNumber } from './isNumber'
-export { merge } from './merge'
-export { omit } from './omit'
-export { keys } from './keys'
-export { createDefaultStyle as defaultStyle } from './defaultStyle'
-export * from './ts'
+export { getPlainText } from './getPlainText';
+export { applyChangeToValue } from './applyChangeToValue';
+export { findStartOfMentionInPlainText } from './findStartOfMentionInPlainText';
+export { getMentions } from './getMentions';
+export { getSuggestionHtmlId } from './getSuggestionHtmlId';
+export { countSuggestions } from './countSuggestions';
+export { getEndOfLastMention } from './getEndOfLastMention';
+export { mapPlainTextIndex } from './mapPlainTextIndex';
+export { iterateMentionsMarkup } from './iterateMentionsMarkup';
+export { getSubstringIndex } from './getSubstringIndex';
+export { isIE } from './isIE';
+export { isNumber } from './isNumber';
+export { merge } from './merge';
+export { omit } from './omit';
+export { keys } from './keys';
+export { createDefaultStyle as defaultStyle } from './defaultStyle';
+export * from './ts';

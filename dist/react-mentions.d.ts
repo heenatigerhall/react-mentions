@@ -4,6 +4,15 @@ declare module "typescript/types/highlighter" {
         left: string | number;
         top: string | number;
     }
+    export interface HighlighterProps {
+        selectionStart: number;
+        selectionEnd: number;
+        value: string;
+        onCaretPositionChange: (ele: CaretPosition) => void;
+        containerRef: any;
+        children: React.ReactNode | React.ReactNode[];
+        style: any;
+    }
 }
 declare module "utils/ts/combineRegExps" {
     export const combineRegExps: (regExps: RegExp[]) => RegExp;
@@ -136,13 +145,31 @@ declare module "typescript/types/types" {
      */
     export type DataFunc = (query: string, callback: (data: SuggestionDataItem[]) => void) => Promise<void> | void | Promise<SuggestionDataItem[]> | SuggestionDataItem[];
 }
+declare module "typescript/types/suggestion" {
+    export interface SuggestionProps {
+        id: string;
+        focused: boolean;
+        ignoreAccents: boolean;
+        index: number;
+        onClick: () => void;
+        onMouseEnter: () => void;
+        query: string;
+        renderSuggestion: (suggestion: any, query: string, highlightedDisplay: React.ReactNode, index: string | number, focused: boolean) => React.ReactNode;
+        suggestion: any;
+        style: any;
+        className: string;
+        classNames: string;
+    }
+}
 declare module "typescript/types/index" {
     export * from "typescript/types/types";
+    export * from "typescript/types/highlighter";
+    export * from "typescript/types/suggestion";
 }
 declare module "utils/ts/readConfigFromChildren" {
-    import { MentionProps } from "typescript/types/index";
-    type MentionChild = React.ReactElement<MentionProps>;
-    export const readConfigFromChildren: (children: MentionChild[]) => {
+    import { Children } from 'react';
+    type Children = React.ReactNode | React.ReactNode[];
+    export const readConfigFromChildren: (children: Children) => {
         markup: string;
         regex: RegExp;
         displayTransform: (id?: string, display?: string) => string;
@@ -175,19 +202,12 @@ declare module "utils/ts/index" {
     export * from "utils/ts/highlighter";
 }
 declare module "Highlighter" {
-    import * as React from 'react';
-    import { CaretPosition } from "typescript/types/highlighter";
-    export interface HighlighterProps {
-        selectionStart: number;
-        selectionEnd: number;
-        value: string;
-        onCaretPositionChange: (ele: CaretPosition) => void;
-        containerRef: any;
-        children: React.ReactNode | React.ReactNode[];
-        style: any;
-    }
     const _default: any;
     export default _default;
+}
+declare module "Suggestion" {
+    const _default_1: any;
+    export default _default_1;
 }
 declare module "typescript/LoadingIndicator/style" {
     export const lineStyle: {

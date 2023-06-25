@@ -1,8 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { defaultStyle } from './utils'
-import { getSubstringIndex } from './utils'
-import { getAllJSDocTagsOfKind } from 'typescript'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { defaultStyle } from './utils';
+import { getSubstringIndex } from './utils';
+import { SuggestionProps } from 'typescript/types';
 
 function Suggestion({
   id,
@@ -14,15 +14,13 @@ function Suggestion({
   query,
   renderSuggestion,
   suggestion,
-  style,
-  className,
-  classNames,
-}) {
-  const rest = { onClick, onMouseEnter }
+  style
+}: SuggestionProps) {
+  const rest = { onClick, onMouseEnter };
 
   const renderContent = () => {
-    let display = getDisplay()
-    let highlightedDisplay = renderHighlightedDisplay(display, query)
+    let display = getDisplay();
+    let highlightedDisplay = renderHighlightedDisplay(display);
 
     if (renderSuggestion) {
       return renderSuggestion(
@@ -31,31 +29,31 @@ function Suggestion({
         highlightedDisplay,
         index,
         focused
-      )
+      );
     }
 
-    return highlightedDisplay
-  }
+    return highlightedDisplay;
+  };
 
   const getDisplay = () => {
     if (typeof suggestion === 'string') {
-      return suggestion
+      return suggestion;
     }
 
-    let { id, display } = suggestion
+    let { id, display } = suggestion;
 
     if (id === undefined || !display) {
-      return id
+      return id;
     }
 
-    return display
-  }
+    return display;
+  };
 
   const renderHighlightedDisplay = (display) => {
-    let i = getSubstringIndex(display, query, ignoreAccents)
+    let i = getSubstringIndex(display, query, ignoreAccents);
 
     if (i === -1) {
-      return <span {...style('display')}>{display}</span>
+      return <span {...style('display')}>{display}</span>;
     }
 
     return (
@@ -64,14 +62,14 @@ function Suggestion({
         <b {...style('highlight')}>{display.substring(i, i + query.length)}</b>
         {display.substring(i + query.length)}
       </span>
-    )
-  }
+    );
+  };
 
   return (
     <li id={id} role="option" aria-selected={focused} {...rest} {...style}>
       {renderContent()}
     </li>
-  )
+  );
 }
 
 Suggestion.propTypes = {
@@ -84,19 +82,19 @@ Suggestion.propTypes = {
     PropTypes.string,
     PropTypes.shape({
       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-      display: PropTypes.string,
-    }),
+      display: PropTypes.string
+    })
   ]).isRequired,
   renderSuggestion: PropTypes.func,
 
-  focused: PropTypes.bool,
-}
+  focused: PropTypes.bool
+};
 
 const styled = defaultStyle(
   {
-    cursor: 'pointer',
+    cursor: 'pointer'
   },
   (props) => ({ '&focused': props.focused })
-)
+);
 
-export default styled(Suggestion)
+export default styled(Suggestion);
