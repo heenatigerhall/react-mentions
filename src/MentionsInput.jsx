@@ -17,13 +17,13 @@ import {
   keys,
   omit,
   getSuggestionHtmlId,
+  defaultStyle
 } from './utils'
 
 import Highlighter from './Highlighter'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import SuggestionsOverlay from './SuggestionsOverlay'
-import { defaultStyle } from './utils'
 
 export const makeTriggerRegex = function (trigger, options = {}) {
   if (trigger instanceof RegExp) {

@@ -1,6 +1,6 @@
 import React from 'react'
 import useStyles from 'substyle'
-import { MentionProps } from '../types/types'
+import { MentionProps } from '../types'
 
 const defaultStyle = {
   fontWeight: 'inherit',

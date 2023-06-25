@@ -1,10 +1,10 @@
 import invariant from 'invariant'
 
-const combineRegExps = (regExps: RegExp[]): RegExp => {
+export const combineRegExps = (regExps: RegExp[]): RegExp => {
   const serializedRegexParser = /^\/(.+)\/(\w+)?$/
   return new RegExp(
     regExps
-      .map(regex => {
+      .map((regex) => {
         const [, regexString, regexFlags] = serializedRegexParser.exec(
           regex.toString()
         )
@@ -20,5 +20,3 @@ const combineRegExps = (regExps: RegExp[]): RegExp => {
     'g'
   )
 }
-
-export default combineRegExps

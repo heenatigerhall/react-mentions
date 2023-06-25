@@ -1,7 +1,7 @@
-import isPlainObject from './isPlainObject'
-import keys from './keys'
+import { isPlainObject } from './isPlainObject'
+import { keys } from './keys'
 
-const mergeDeep = (target, source) => {
+export const mergeDeep = (target, source) => {
   let output = Object.assign({}, target)
   if (isPlainObject(target) && isPlainObject(source)) {
     keys(source).forEach(key => {
@@ -16,4 +16,3 @@ const mergeDeep = (target, source) => {
   return output
 }
 
-export default mergeDeep

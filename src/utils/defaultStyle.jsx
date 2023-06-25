@@ -1,7 +1,7 @@
 import React from 'react'
 import useStyles from 'substyle'
 
-function createDefaultStyle(defaultStyle, getModifiers) {
+export function createDefaultStyle(defaultStyle, getModifiers) {
   const enhance = (ComponentToWrap) => {
     const DefaultStyleEnhancer = ({
       style,
@@ -31,4 +31,3 @@ function createDefaultStyle(defaultStyle, getModifiers) {
   return enhance
 }
 
-export default createDefaultStyle

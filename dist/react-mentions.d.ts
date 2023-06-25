@@ -1,5 +1,5 @@
 /// <reference types="react" />
-declare module "Typescript/LoadingIndicator/style" {
+declare module "typescript/LoadingIndicator/style" {
     export const lineStyle: {
         borderRadius: string;
         height: string;
@@ -10,31 +10,31 @@ declare module "Typescript/LoadingIndicator/style" {
         amimationFillMode: string;
     };
 }
-declare module "Typescript/LoadingIndicator/components/LoadingUserItem" {
+declare module "typescript/LoadingIndicator/components/LoadingUserItem" {
     import * as React from 'react';
     export function LoadingUserItem(): React.JSX.Element;
 }
-declare module "Typescript/LoadingIndicator/components/index" {
-    export * from "Typescript/LoadingIndicator/components/LoadingUserItem";
+declare module "typescript/LoadingIndicator/components/index" {
+    export * from "typescript/LoadingIndicator/components/LoadingUserItem";
 }
-declare module "Typescript/LoadingIndicator/LoadingIndicator" {
+declare module "typescript/LoadingIndicator/LoadingIndicator" {
     import React from 'react';
     import useStyles from 'substyle';
     export function LoadingIndicator({ style, className, classNames, }: useStyles.StylingProps): React.JSX.Element;
 }
-declare module "Typescript/LoadingIndicator/types" {
+declare module "typescript/LoadingIndicator/types" {
     export interface LoadingIndictorProps {
     }
 }
-declare module "Typescript/LoadingIndicator/index" {
-    export * from "Typescript/LoadingIndicator/LoadingIndicator";
-    export * from "Typescript/LoadingIndicator/style";
-    export * from "Typescript/LoadingIndicator/types";
+declare module "typescript/LoadingIndicator/index" {
+    export * from "typescript/LoadingIndicator/LoadingIndicator";
+    export * from "typescript/LoadingIndicator/style";
+    export * from "typescript/LoadingIndicator/types";
 }
-declare module "Typescript/index" {
-    export * from "Typescript/LoadingIndicator/index";
+declare module "typescript/index" {
+    export * from "typescript/LoadingIndicator/index";
 }
-declare module "Typescript/types/types" {
+declare module "typescript/types/types" {
     import * as React from 'react';
     /**
      * The properties for the @see MentionsInput component.
@@ -141,10 +141,13 @@ declare module "Typescript/types/types" {
      */
     export type DataFunc = (query: string, callback: (data: SuggestionDataItem[]) => void) => Promise<void> | void | Promise<SuggestionDataItem[]> | SuggestionDataItem[];
 }
-declare module "Typescript/Mention/Mention" {
+declare module "typescript/types/index" {
+    export * from "typescript/types/types";
+}
+declare module "typescript/Mention/Mention" {
     import React from 'react';
     import useStyles from 'substyle';
-    import { MentionProps } from "Typescript/types/types";
+    import { MentionProps } from "typescript/types/index";
     export interface ExtendedProps {
         display: string;
     }
@@ -163,51 +166,51 @@ declare module "Typescript/Mention/Mention" {
     };
     export default Mention;
 }
-declare module "Typescript/types/index" {
-    export * from "Typescript/types/types";
+declare module "utils/ts/combineRegExps" {
+    export const combineRegExps: (regExps: RegExp[]) => RegExp;
 }
-declare module "utils/combineRegExps" {
-    const combineRegExps: (regExps: RegExp[]) => RegExp;
-    export default combineRegExps;
+declare module "utils/ts/countPlaceholders" {
+    export const countPlaceholders: (markup: string) => number;
 }
-declare module "utils/countPlaceholders" {
-    const countPlaceholders: (markup: string) => number;
-    export default countPlaceholders;
+declare module "utils/ts/escapeRegex" {
+    export const escapeRegex: (str: string) => string;
 }
-declare module "utils/escapeRegex" {
-    const escapeRegex: (str: string) => string;
-    export default escapeRegex;
-}
-declare module "utils/placeholders" {
-    const _default: {
+declare module "utils/ts/placeholders" {
+    export const PLACEHOLDERS: {
         id: string;
         display: string;
     };
-    export default _default;
 }
-declare module "utils/findPositionOfCapturingGroup" {
-    const findPositionOfCapturingGroup: (markup: string, parameterName: string) => number;
-    export default findPositionOfCapturingGroup;
+declare module "utils/ts/findPositionOfCapturingGroup" {
+    export const findPositionOfCapturingGroup: (markup: string, parameterName: string) => number;
 }
-declare module "utils/makeMentionsMarkup" {
-    const makeMentionsMarkup: (markup: string, id: string, display: string) => string;
-    export default makeMentionsMarkup;
+declare module "utils/ts/makeMentionsMarkup" {
+    export const makeMentionsMarkup: (markup: string, id: string, display: string) => string;
 }
-declare module "utils/markupToRegex" {
-    const markupToRegex: (markup: string) => RegExp;
-    export default markupToRegex;
+declare module "utils/ts/markupToRegex" {
+    export const markupToRegex: (markup: string) => RegExp;
 }
-declare module "utils/readConfigFromChildren" {
-    import { MentionProps } from "Typescript/types/types";
+declare module "utils/ts/readConfigFromChildren" {
+    import { MentionProps } from "typescript/types/index";
     type MentionChild = React.ReactElement<MentionProps>;
-    const readConfigFromChildren: (children: MentionChild[]) => {
+    export const readConfigFromChildren: (children: MentionChild[]) => {
         markup: string;
         regex: RegExp;
         displayTransform: (id?: string, display?: string) => string;
     }[];
-    export default readConfigFromChildren;
+    export const coerceCapturingGroups: (regex: RegExp, markup?: string) => RegExp;
 }
-declare module "utils/spliceString" {
-    const spliceString: (str: string, start: number, end: number, insert: string) => string;
-    export default spliceString;
+declare module "utils/ts/spliceString" {
+    export const spliceString: (str: string, start: number, end: number, insert: string) => string;
+}
+declare module "utils/ts/index" {
+    export * from "utils/ts/combineRegExps";
+    export * from "utils/ts/countPlaceholders";
+    export * from "utils/ts/escapeRegex";
+    export * from "utils/ts/findPositionOfCapturingGroup";
+    export * from "utils/ts/makeMentionsMarkup";
+    export * from "utils/ts/markupToRegex";
+    export * from "utils/ts/placeholders";
+    export * from "utils/ts/readConfigFromChildren";
+    export * from "utils/ts/spliceString";
 }

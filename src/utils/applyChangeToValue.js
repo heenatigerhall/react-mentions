@@ -1,10 +1,10 @@
-import mapPlainTextIndex from './mapPlainTextIndex'
-import getPlainText from './getPlainText'
-import spliceString from './spliceString'
+import { mapPlainTextIndex } from './mapPlainTextIndex'
+import { getPlainText } from './getPlainText'
+import { spliceString } from './ts'
 
 // Applies a change from the plain text textarea to the underlying marked up value
 // guided by the textarea text selection ranges before and after the change
-const applyChangeToValue = (
+export const applyChangeToValue = (
   value,
   plainTextValue,
   { selectionStartBefore, selectionEndBefore, selectionEndAfter },
@@ -81,4 +81,3 @@ const applyChangeToValue = (
   return newValue
 }
 
-export default applyChangeToValue

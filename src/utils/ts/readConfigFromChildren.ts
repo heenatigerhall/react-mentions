@@ -1,12 +1,12 @@
 import { Children } from 'react'
 import invariant from 'invariant'
-import markupToRegex from './markupToRegex'
-import countPlaceholders from './countPlaceholders'
-import { MentionProps } from '../Typescript/types/types'
+import { markupToRegex } from './markupToRegex'
+import { countPlaceholders } from './countPlaceholders'
+import { MentionProps } from 'typescript/types'
 
 type MentionChild = React.ReactElement<MentionProps>
 
-const readConfigFromChildren = (children: MentionChild[]) =>
+export const readConfigFromChildren = (children: MentionChild[]) =>
   (Children.toArray(children) as MentionChild[]).map(
     ({ props: { markup, regex, displayTransform } }) => ({
       markup,
@@ -19,7 +19,7 @@ const readConfigFromChildren = (children: MentionChild[]) =>
   )
 
 // make sure that the custom regex defines the correct number of capturing groups
-const coerceCapturingGroups = (regex: RegExp, markup?: string) => {
+export const coerceCapturingGroups = (regex: RegExp, markup?: string) => {
   // I did a ugly hack here because
   // didn't want to waste time her
   const numberOfGroups =
@@ -33,5 +33,3 @@ const coerceCapturingGroups = (regex: RegExp, markup?: string) => {
 
   return regex
 }
-
-export default readConfigFromChildren

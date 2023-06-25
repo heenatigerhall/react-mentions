@@ -632,9 +632,7 @@ Check the top-level render call using <` + v + ">.");
   }()), we;
 }
 process.env.NODE_ENV === "production" ? ut.exports = Br() : ut.exports = Lr();
-var V = ut.exports;
-const qe = (t) => t.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-var kr = function(t, n, e, r, u, i, a, o) {
+var V = ut.exports, kr = function(t, n, e, r, u, i, a, o) {
   if (process.env.NODE_ENV !== "production" && n === void 0)
     throw new Error("invariant requires an error message argument");
   if (!t) {
@@ -654,20 +652,7 @@ var kr = function(t, n, e, r, u, i, a, o) {
     throw l.framesToPop = 1, l;
   }
 }, Nr = kr;
-const De = /* @__PURE__ */ Jt(Nr), de = {
-  id: "__id__",
-  display: "__display__"
-}, xt = (t, n) => {
-  De(
-    n === "id" || n === "display",
-    `Second arg must be either "id" or "display", got: "${n}"`
-  );
-  let e = t.indexOf(de.display), r = t.indexOf(de.id);
-  return e < 0 && (e = null), r < 0 && (r = null), De(
-    e !== null || r !== null,
-    `The markup '${t}' does not contain either of the placeholders '__id__' or '__display__'`
-  ), e !== null && r !== null ? n === "id" && r <= e || n === "display" && e <= r ? 0 : 1 : 0;
-}, Wr = (t) => {
+const De = /* @__PURE__ */ Jt(Nr), Wr = (t) => {
   const n = /^\/(.+)\/(\w+)?$/;
   return new RegExp(
     t.map((e) => {
@@ -684,8 +669,42 @@ const De = /* @__PURE__ */ Jt(Nr), de = {
 }, Gt = (t) => {
   let n = 0;
   return t.indexOf("__id__") >= 0 && n++, t.indexOf("__display__") >= 0 && n++, n;
-}, Yr = () => {
-}, Be = (t, n, e, r = Yr) => {
+}, qe = (t) => t.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&"), de = {
+  id: "__id__",
+  display: "__display__"
+}, xt = (t, n) => {
+  De(
+    n === "id" || n === "display",
+    `Second arg must be either "id" or "display", got: "${n}"`
+  );
+  let e = t.indexOf(de.display), r = t.indexOf(de.id);
+  return e < 0 && (e = null), r < 0 && (r = null), De(
+    e !== null || r !== null,
+    `The markup '${t}' does not contain either of the placeholders '__id__' or '__display__'`
+  ), e !== null && r !== null ? n === "id" && r <= e || n === "display" && e <= r ? 0 : 1 : 0;
+}, Yr = (t, n, e) => t.replace(de.id, n).replace(de.display, e), qr = (t) => {
+  const n = qe(t), e = t[t.indexOf(de.display) + de.display.length], r = t[t.indexOf(de.id) + de.id.length];
+  return new RegExp(
+    n.replace(
+      de.display,
+      `([^${qe(e || "")}]+?)`
+    ).replace(de.id, `([^${qe(r || "")}]+?)`)
+  );
+}, he = (t) => Me.toArray(t).map(
+  ({ props: { markup: n, regex: e, displayTransform: r } }) => ({
+    markup: n,
+    regex: e ? Hr(e, n) : qr(n),
+    displayTransform: r || ((u, i) => i || u)
+  })
+), Hr = (t, n) => {
+  var u;
+  const e = ((u = new RegExp(t.toString() + "|").exec("")) == null ? void 0 : u.length) - 1, r = Gt(n);
+  return De(
+    e === r,
+    `Number of capturing groups in RegExp ${t.toString()} (${e}) does not match the number of placeholders in the markup '${n}' (${r})`
+  ), t;
+}, Ie = (t, n, e, r) => t.substring(0, n) + r + t.substring(e), Ur = () => {
+}, Be = (t, n, e, r = Ur) => {
   const u = Wr(n.map((f) => f.regex));
   let i = 2;
   const a = n.map(({ markup: f }) => {
@@ -728,7 +747,7 @@ const De = /* @__PURE__ */ Jt(Nr), de = {
   }, (o, l, c) => {
     u === void 0 && c + o.length >= e && (u = l + e - c);
   }), u === void 0 ? t.length : u;
-}, Ie = (t, n, e, r) => t.substring(0, n) + r + t.substring(e), qr = (t, n, { selectionStartBefore: e, selectionEndBefore: r, selectionEndAfter: u }, i) => {
+}, zr = (t, n, { selectionStartBefore: e, selectionEndBefore: r, selectionEndAfter: u }, i) => {
   let a = ye(t, i), o = a.length - n.length;
   e === "undefined" && (e = u + o), r === "undefined" && (r = e), e === r && r === u && a.length === n.length && (e = e - 1);
   let l = n.slice(e, u), c = Math.min(e, u), f = r;
@@ -769,31 +788,10 @@ const De = /* @__PURE__ */ Jt(Nr), de = {
 }, Xt = (t, n) => `${t}-${n}`, Ne = (t) => Object.values(t).reduce(
   (n, { results: e }) => n + e.length,
   0
-), Hr = (t, n) => {
+), Vr = (t, n) => {
   const e = je(t, n), r = e[e.length - 1];
   return r ? r.plainTextIndex + r.display.length : 0;
-}, Ur = (t) => {
-  const n = qe(t), e = t[t.indexOf(de.display) + de.display.length], r = t[t.indexOf(de.id) + de.id.length];
-  return new RegExp(
-    n.replace(
-      de.display,
-      `([^${qe(e || "")}]+?)`
-    ).replace(de.id, `([^${qe(r || "")}]+?)`)
-  );
-}, he = (t) => Me.toArray(t).map(
-  ({ props: { markup: n, regex: e, displayTransform: r } }) => ({
-    markup: n,
-    regex: e ? zr(e, n) : Ur(n),
-    displayTransform: r || ((u, i) => i || u)
-  })
-), zr = (t, n) => {
-  var u;
-  const e = ((u = new RegExp(t.toString() + "|").exec("")) == null ? void 0 : u.length) - 1, r = Gt(n);
-  return De(
-    e === r,
-    `Number of capturing groups in RegExp ${t.toString()} (${e}) does not match the number of placeholders in the markup '${n}' (${r})`
-  ), t;
-}, Vr = (t, n, e) => t.replace(de.id, n).replace(de.display, e), Kr = [
+}, Kr = [
   {
     base: "A",
     letters: /(&#65;|&#9398;|&#65313;|&#192;|&#193;|&#194;|&#7846;|&#7844;|&#7850;|&#7848;|&#195;|&#256;|&#258;|&#7856;|&#7854;|&#7860;|&#7858;|&#550;|&#480;|&#196;|&#478;|&#7842;|&#197;|&#506;|&#461;|&#512;|&#514;|&#7840;|&#7852;|&#7862;|&#7680;|&#260;|&#570;|&#11375;|[\u0041\u24B6\uFF21\u00C0\u00C1\u00C2\u1EA6\u1EA4\u1EAA\u1EA8\u00C3\u0100\u0102\u1EB0\u1EAE\u1EB4\u1EB2\u0226\u01E0\u00C4\u01DE\u1EA2\u00C5\u01FA\u01CD\u0200\u0202\u1EA0\u1EAC\u1EB6\u1E00\u0104\u023A\u2C6F])/g
@@ -2618,7 +2616,7 @@ class ct extends me.Component {
       if (Ye = !1, Gr() && (document.activeElement && document.activeElement.contentDocument || document).activeElement !== e.target)
         return;
       const r = this.props.value || "", u = he(this.props.children);
-      let i = e.target.value, a = qr(
+      let i = e.target.value, a = zr(
         r,
         i,
         {
@@ -2789,7 +2787,7 @@ class ct extends me.Component {
       );
       if (o === null)
         return;
-      const l = Hr(
+      const l = Vr(
         u.substring(0, o),
         a
       ), c = e.substring(
@@ -2870,7 +2868,7 @@ class ct extends me.Component {
         appendSpaceOnAdd: C,
         onAdd: O
       } = f.props, A = ie(l, c, i, "START"), F = A + a - i;
-      let S = Vr(g, e, r);
+      let S = Yr(g, e, r);
       C && (S += " ");
       const w = Ie(l, A, F, S);
       this.inputElement.focus();

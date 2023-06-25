@@ -1,6 +1,6 @@
-import PLACEHOLDERS from './placeholders'
+import { PLACEHOLDERS } from './placeholders'
 
-const makeMentionsMarkup = (
+export const makeMentionsMarkup = (
   markup: string,
   id: string,
   display: string
@@ -9,5 +9,3 @@ const makeMentionsMarkup = (
     .replace(PLACEHOLDERS.id, id)
     .replace(PLACEHOLDERS.display, display)
 }
-
-export default makeMentionsMarkup

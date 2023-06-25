@@ -1,6 +1,6 @@
-import getMentions from './getMentions'
+import { getMentions } from './getMentions'
 
-const getEndOfLastMention = (value, config) => {
+export const getEndOfLastMention = (value, config) => {
   const mentions = getMentions(value, config)
   const lastMention = mentions[mentions.length - 1]
   return lastMention
@@ -8,4 +8,3 @@ const getEndOfLastMention = (value, config) => {
     : 0
 }
 
-export default getEndOfLastMention

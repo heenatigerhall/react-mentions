@@ -1,7 +1,7 @@
-import PLACEHOLDERS from './placeholders'
-import escapeRegex from './escapeRegex'
+import { PLACEHOLDERS } from './placeholders'
+import { escapeRegex } from './escapeRegex'
 
-const markupToRegex = (markup: string): RegExp => {
+export const markupToRegex = (markup: string): RegExp => {
   const escapedMarkup = escapeRegex(markup)
 
   const charAfterDisplay =
@@ -19,5 +19,3 @@ const markupToRegex = (markup: string): RegExp => {
       .replace(PLACEHOLDERS.id, `([^${escapeRegex(charAfterId || '')}]+?)`)
   )
 }
-
-export default markupToRegex

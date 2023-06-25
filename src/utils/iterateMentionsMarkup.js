@@ -1,12 +1,10 @@
-import findPositionOfCapturingGroup from './findPositionOfCapturingGroup'
-import combineRegExps from './combineRegExps'
-import countPlaceholders from './countPlaceholders'
+import { combineRegExps, countPlaceholders, findPositionOfCapturingGroup } from "./ts"
 
-const emptyFn = () => {}
+const emptyFn = () => { }
 
 // Finds all occurrences of the markup in the value and calls the `markupIteratee` callback for each of them.
 // The optional `textIteratee` callback is called for each plain text ranges in between these markup occurrences.
-const iterateMentionsMarkup = (
+export const iterateMentionsMarkup = (
   value,
   config,
   markupIteratee,
@@ -59,4 +57,3 @@ const iterateMentionsMarkup = (
   }
 }
 
-export default iterateMentionsMarkup

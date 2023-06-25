@@ -1,7 +1,7 @@
 import invariant from 'invariant'
-import PLACEHOLDERS from './placeholders'
+import { PLACEHOLDERS } from './placeholders'
 
-const findPositionOfCapturingGroup = (
+export const findPositionOfCapturingGroup = (
   markup: string,
   parameterName: string
 ): number => {
@@ -35,5 +35,3 @@ const findPositionOfCapturingGroup = (
   // just one placeholder is being used, we'll use the captured string for both parameters
   return 0
 }
-
-export default findPositionOfCapturingGroup
