@@ -2,10 +2,10 @@ import React from 'react';
 import useStyles from 'substyle';
 import { MentionProps } from '../types';
 export interface ExtendedProps {
-    display: string;
+    display?: string;
 }
 export declare const Mention: {
-    ({ display, style, className, classNames, }: MentionProps & useStyles.StylingProps & ExtendedProps): React.JSX.Element;
+    ({ display, style, className, classNames }: MentionProps & useStyles.StylingProps & ExtendedProps): React.JSX.Element;
     defaultProps: {
         trigger: string;
         markup: string;

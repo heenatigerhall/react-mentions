@@ -1,1 +1,1 @@
-export function getSuggestionHtmlId(prefix: any, id: any): string;
+export declare const getSuggestionHtmlId: (prefix: string, id: string) => string;

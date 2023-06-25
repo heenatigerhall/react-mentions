@@ -1,11 +1,12 @@
-import React, { Children, useState, useEffect } from 'react'
-import PropTypes from 'prop-types'
-import { inline } from 'substyle'
-import { defaultStyle } from './utils'
+import React, { Children, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { inline } from 'substyle';
+import { defaultStyle } from './utils';
 
-import { getSuggestionHtmlId } from './utils'
-import Suggestion from './Suggestion'
-import { LoadingIndicator } from './typescript'
+import { getSuggestionHtmlId } from './utils';
+import Suggestion from './Suggestion';
+import { LoadingIndicator } from './typescript';
+import { SuggestionOverlayProps } from 'typescript/types/suggestionOverlay';
 
 function SuggestionsOverlay({
   id,
@@ -26,9 +27,9 @@ function SuggestionsOverlay({
   style,
   customSuggestionsContainer,
   onMouseDown,
-  onMouseEnter,
-}) {
-  const [ulElement, setUlElement] = useState(undefined)
+  onMouseEnter
+}: SuggestionOverlayProps) {
+  const [ulElement, setUlElement] = useState(undefined);
 
   useEffect(() => {
     if (
@@ -36,21 +37,22 @@ function SuggestionsOverlay({
       ulElement.offsetHeight >= ulElement.scrollHeight ||
       !scrollFocusedIntoView
     ) {
-      return
+      return;
     }
-    const scrollTop = ulElement.scrollTop
+    const scrollTop = ulElement.scrollTop;
 
-    let { top, bottom } = ulElement.children[focusIndex].getBoundingClientRect()
-    const { top: topContainer } = ulElement.getBoundingClientRect()
-    top = top - topContainer + scrollTop
-    bottom = bottom - topContainer + scrollTop
+    let { top, bottom } =
+      ulElement.children[focusIndex].getBoundingClientRect();
+    const { top: topContainer } = ulElement.getBoundingClientRect();
+    top = top - topContainer + scrollTop;
+    bottom = bottom - topContainer + scrollTop;
 
     if (top < scrollTop) {
-      ulElement.scrollTop = top
+      ulElement.scrollTop = top;
     } else if (bottom > ulElement.offsetHeight) {
-      ulElement.scrollTop = bottom - ulElement.offsetHeight
+      ulElement.scrollTop = bottom - ulElement.offsetHeight;
     }
-  }, [focusIndex, scrollFocusedIntoView, ulElement])
+  }, [focusIndex, scrollFocusedIntoView, ulElement]);
 
   const renderSuggestions = () => {
     const suggestionsToRender = (
@@ -62,29 +64,32 @@ function SuggestionsOverlay({
         {...style('list')}
       >
         {Object.values(suggestions).reduce(
-          (accResults, { results, queryInfo }) => [
+          (accResults: any[], { results, queryInfo }) => [
             ...accResults,
             ...results.map((result, index) =>
               renderSuggestion(result, queryInfo, accResults.length + index)
-            ),
+            )
           ],
           []
         )}
       </ul>
-    )
+    );
 
     if (customSuggestionsContainer)
-      return customSuggestionsContainer(suggestionsToRender)
-    return suggestionsToRender
-  }
+      return customSuggestionsContainer(suggestionsToRender);
+    return suggestionsToRender;
+  };
 
   const renderSuggestion = (result, queryInfo, index) => {
-    const isFocused = index === focusIndex
-    const { childIndex, query } = queryInfo
-    const { renderSuggestion } = Children.toArray(children)[childIndex].props
+    const isFocused = index === focusIndex;
+    const { childIndex, query } = queryInfo;
+    const { renderSuggestion } = (
+      Children.toArray(children)[childIndex] as React.ReactElement
+    ).props;
 
     return (
       <Suggestion
+        // @ts-ignore
         style={style('item')}
         key={`${childIndex}-${getID(result)}`}
         id={getSuggestionHtmlId(id, index)}
@@ -97,40 +102,41 @@ function SuggestionsOverlay({
         onClick={() => select(result, queryInfo)}
         onMouseEnter={() => handleMouseEnter(index)}
       />
-    )
-  }
+    );
+  };
 
   const renderLoadingIndicator = () => {
     if (!isLoading) {
-      return
+      return;
     }
 
-    return <LoadingIndicator style={style('loadingIndicator')} />
-  }
+    return <LoadingIndicator style={style('loadingIndicator')} />;
+  };
 
-  const handleMouseEnter = (index, ev) => {
+  const handleMouseEnter = (index: number) => {
     if (onMouseEnter) {
-      onMouseEnter(index)
+      onMouseEnter(index);
     }
-  }
+  };
 
   const select = (suggestion, queryInfo) => {
-    onSelect(suggestion, queryInfo)
-  }
+    onSelect(suggestion, queryInfo);
+  };
 
   const getID = (suggestion) => {
     if (typeof suggestion === 'string') {
-      return suggestion
+      return suggestion;
     }
-    return suggestion.id
-  }
+    return suggestion.id;
+  };
 
   if (!isOpened) {
-    return null
+    return null;
   }
 
   return (
     <div
+      // @ts-ignore
       {...inline({ position: position || 'absolute', left, right, top }, style)}
       onMouseDown={onMouseDown}
       ref={containerRef}
@@ -138,7 +144,7 @@ function SuggestionsOverlay({
       {renderSuggestions()}
       {renderLoadingIndicator()}
     </div>
-  )
+  );
 }
 
 SuggestionsOverlay.propTypes = {
@@ -162,10 +168,10 @@ SuggestionsOverlay.propTypes = {
       current:
         typeof Element === 'undefined'
           ? PropTypes.any
-          : PropTypes.instanceOf(Element),
-    }),
-  ]),
-}
+          : PropTypes.instanceOf(Element)
+    })
+  ])
+};
 
 const styled = defaultStyle({
   zIndex: 1,
@@ -176,8 +182,8 @@ const styled = defaultStyle({
   list: {
     margin: 0,
     padding: 0,
-    listStyleType: 'none',
-  },
-})
+    listStyleType: 'none'
+  }
+});
 
-export default styled(SuggestionsOverlay)
+export default styled(SuggestionsOverlay);
