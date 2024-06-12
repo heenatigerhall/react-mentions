@@ -1,4 +1,4 @@
-import iterateMentionsMarkup from './iterateMentionsMarkup'
+import { iterateMentionsMarkup } from './iterateMentionsMarkup'
 
 // For the passed character index in the plain text string, returns the corresponding index
 // in the marked up value string.
@@ -7,7 +7,7 @@ import iterateMentionsMarkup from './iterateMentionsMarkup'
 //   - 'START' to return the index of the mention markup's first char (default)
 //   - 'END' to return the index after its last char
 //   - 'NULL' to return null
-const mapPlainTextIndex = (
+export const mapPlainTextIndex = (
   value,
   config,
   indexInPlainText,
@@ -56,4 +56,3 @@ const mapPlainTextIndex = (
   return result === undefined ? value.length : result
 }
 
-export default mapPlainTextIndex

@@ -1,6 +1,6 @@
 // This contains all the latin letters and the regex that match these letters with diacritics
 // https://stackoverflow.com/questions/990904/remove-accents-diacritics-in-a-string-in-javascript
-const lettersDiacritics = [
+export const lettersDiacritics = [
   {
     base: 'A',
     letters: /(&#65;|&#9398;|&#65313;|&#192;|&#193;|&#194;|&#7846;|&#7844;|&#7850;|&#7848;|&#195;|&#256;|&#258;|&#7856;|&#7854;|&#7860;|&#7858;|&#550;|&#480;|&#196;|&#478;|&#7842;|&#197;|&#506;|&#461;|&#512;|&#514;|&#7840;|&#7852;|&#7862;|&#7680;|&#260;|&#570;|&#11375;|[\u0041\u24B6\uFF21\u00C0\u00C1\u00C2\u1EA6\u1EA4\u1EAA\u1EA8\u00C3\u0100\u0102\u1EB0\u1EAE\u1EB4\u1EB2\u0226\u01E0\u00C4\u01DE\u1EA2\u00C5\u01FA\u01CD\u0200\u0202\u1EA0\u1EAC\u1EB6\u1E00\u0104\u023A\u2C6F])/g,
@@ -363,4 +363,3 @@ const lettersDiacritics = [
   },
 ]
 
-export default lettersDiacritics

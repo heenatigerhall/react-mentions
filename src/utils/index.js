@@ -1,22 +1,17 @@
-export { default as escapeRegex } from './escapeRegex'
-export { default as getPlainText } from './getPlainText'
-export { default as applyChangeToValue } from './applyChangeToValue'
-export {
-  default as findStartOfMentionInPlainText,
-} from './findStartOfMentionInPlainText'
-export { default as getMentions } from './getMentions'
-export { default as getSuggestionHtmlId } from './getSuggestionHtmlId'
-export { default as countSuggestions } from './countSuggestions'
-export { default as getEndOfLastMention } from './getEndOfLastMention'
-export { default as mapPlainTextIndex } from './mapPlainTextIndex'
-export { default as readConfigFromChildren } from './readConfigFromChildren'
-export { default as spliceString } from './spliceString'
-export { default as makeMentionsMarkup } from './makeMentionsMarkup'
-export { default as iterateMentionsMarkup } from './iterateMentionsMarkup'
-export { default as getSubstringIndex } from './getSubstringIndex'
-export { default as isIE } from './isIE'
-export { default as isNumber } from './isNumber'
-export { default as merge } from './merge'
-export { default as omit } from './omit'
-export { default as keys } from './keys'
-export { default as defaultStyle } from './defaultStyle'
+export { getPlainText } from './getPlainText';
+export { applyChangeToValue } from './applyChangeToValue';
+export { findStartOfMentionInPlainText } from './findStartOfMentionInPlainText';
+export { getMentions } from './getMentions';
+export { getSuggestionHtmlId } from './getSuggestionHtmlId';
+export { countSuggestions } from './countSuggestions';
+export { getEndOfLastMention } from './getEndOfLastMention';
+export { mapPlainTextIndex } from './mapPlainTextIndex';
+export { iterateMentionsMarkup } from './iterateMentionsMarkup';
+export { getSubstringIndex } from './getSubstringIndex';
+export { isIE } from './isIE';
+export { isNumber } from './isNumber';
+export { merge } from './merge';
+export { omit } from './omit';
+export { keys } from './keys';
+export { createDefaultStyle as defaultStyle } from './defaultStyle';
+export * from './ts';

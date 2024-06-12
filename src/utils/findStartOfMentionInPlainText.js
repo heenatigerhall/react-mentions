@@ -1,9 +1,9 @@
-import iterateMentionsMarkup from './iterateMentionsMarkup'
+import { iterateMentionsMarkup } from './iterateMentionsMarkup'
 
 // For a given indexInPlainText that lies inside a mention,
 // returns a the index of of the first char of the mention in the plain text.
 // If indexInPlainText does not lie inside a mention, returns indexInPlainText.
-const findStartOfMentionInPlainText = (value, config, indexInPlainText) => {
+export const findStartOfMentionInPlainText = (value, config, indexInPlainText) => {
   let result = indexInPlainText
   let foundMention = false
 
@@ -31,4 +31,3 @@ const findStartOfMentionInPlainText = (value, config, indexInPlainText) => {
   }
 }
 
-export default findStartOfMentionInPlainText

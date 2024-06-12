@@ -1,6 +1,6 @@
-import iterateMentionsMarkup from './iterateMentionsMarkup'
+import {iterateMentionsMarkup} from './iterateMentionsMarkup'
 
-const getMentions = (value, config) => {
+export const getMentions = (value, config) => {
   const mentions = []
   iterateMentionsMarkup(
     value,
@@ -18,4 +18,3 @@ const getMentions = (value, config) => {
   return mentions
 }
 
-export default getMentions
