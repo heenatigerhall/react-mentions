@@ -121,7 +121,7 @@ var _toConsumableArray = _interopDefault(require("@babel/runtime/helpers/toConsu
     };
   });
 }, coerceCapturingGroups = function(regex, markup) {
-  var numberOfGroups = new RegExp(regex.toString() + "|").exec("").length - 1, numberOfPlaceholders = countPlaceholders(markup);
+  var _RegExp$exec, numberOfGroups = (null === (_RegExp$exec = new RegExp(regex.toString() + "|").exec("")) || void 0 === _RegExp$exec ? void 0 : _RegExp$exec.length) - 1, numberOfPlaceholders = countPlaceholders(markup);
   return invariant(numberOfGroups === numberOfPlaceholders, "Number of capturing groups in RegExp ".concat(regex.toString(), " (").concat(numberOfGroups, ") does not match the number of placeholders in the markup '").concat(markup, "' (").concat(numberOfPlaceholders, ")")), 
   regex;
 }, makeMentionsMarkup = function(markup, id, display) {
@@ -596,7 +596,15 @@ var styled$1 = createDefaultStyle({
   return {
     "&focused": props.focused
   };
-}), Suggestion$1 = styled$1(Suggestion);
+}), Suggestion$1 = styled$1(Suggestion), lineStyle = {
+  borderRadius: "1.25rem",
+  height: "0.5rem",
+  marginBottom: "0.5rem",
+  background: "linear-gradient(to right, #99A0A3 0%, #707679 20%, #464A4D 40%, #464A4D 60%, #707679 80% , #99A0A3 100%)",
+  backgroundSize: "1000px",
+  animation: "placeholderShimmer 1.2s infinite linear",
+  amimationFillMode: "forwards"
+};
 
 function ownKeys$1(object, enumerableOnly) {
   var keys = Object.keys(object);
@@ -621,56 +629,49 @@ function _objectSpread$1(target) {
   return target;
 }
 
+function LoadingUserItem() {
+  return React.createElement("div", {
+    style: {
+      display: "flex",
+      padding: "1rem",
+      alignItems: "center"
+    }
+  }, React.createElement("div", {
+    style: {
+      background: lineStyle.background,
+      backgroundSize: lineStyle.backgroundSize,
+      width: "2rem",
+      height: "2rem",
+      borderRadius: "50%",
+      animation: lineStyle.animation
+    }
+  }), React.createElement("div", {
+    style: {
+      display: "block",
+      alignItems: "center",
+      marginLeft: "0.5rem"
+    }
+  }, React.createElement("div", {
+    style: _objectSpread$1(_objectSpread$1({}, lineStyle), {}, {
+      width: "12rem"
+    })
+  }), React.createElement("div", {
+    style: _objectSpread$1(_objectSpread$1({}, lineStyle), {}, {
+      width: "10rem"
+    })
+  }), React.createElement("div", {
+    style: _objectSpread$1(_objectSpread$1({}, lineStyle), {}, {
+      width: "8rem"
+    })
+  })));
+}
+
 function LoadingIndicator(_ref) {
   var style = _ref.style, className = _ref.className, classNames = _ref.classNames, styles = useStyles__default(defaultstyle, {
     style: style,
     className: className,
     classNames: classNames
-  }), spinnerStyles = styles("spinner"), lineStyle = {
-    borderRadius: "1.25rem",
-    height: "0.5rem",
-    marginBottom: "0.5rem",
-    background: "linear-gradient(to right, #99A0A3 0%, #707679 20%, #464A4D 40%, #464A4D 60%, #707679 80% , #99A0A3 100%)",
-    backgroundSize: "1000px",
-    animation: "placeholderShimmer 1.2s infinite linear",
-    amimationFillMode: "forwards"
-  };
-  function LoadingUserItem() {
-    return React__default.createElement("div", {
-      style: {
-        display: "flex",
-        padding: "1rem",
-        alignItems: "center"
-      }
-    }, React__default.createElement("div", {
-      style: {
-        background: lineStyle.background,
-        backgroundSize: lineStyle.backgroundSize,
-        width: "2rem",
-        height: "2rem",
-        borderRadius: "50%",
-        animation: lineStyle.animation
-      }
-    }), React__default.createElement("div", {
-      style: {
-        display: "block",
-        alignItems: "center",
-        marginLeft: "0.5rem"
-      }
-    }, React__default.createElement("div", {
-      style: _objectSpread$1(_objectSpread$1({}, lineStyle), {}, {
-        width: "12rem"
-      })
-    }), React__default.createElement("div", {
-      style: _objectSpread$1(_objectSpread$1({}, lineStyle), {}, {
-        width: "10rem"
-      })
-    }), React__default.createElement("div", {
-      style: _objectSpread$1(_objectSpread$1({}, lineStyle), {}, {
-        width: "8rem"
-      })
-    })));
-  }
+  }), spinnerStyles = styles("spinner");
   return React__default.createElement("div", styles, React__default.createElement("div", spinnerStyles, React__default.createElement(React__default.Fragment, null, _toConsumableArray(Array(4)).map(function(ele) {
     return React__default.createElement(LoadingUserItem, {
       key: ele
@@ -1304,16 +1305,7 @@ var getComputedStyleLengthProp = function(forElement, propertyName) {
   return React__default.createElement("strong", styles, display);
 };
 
-Mention.propTypes = {
-  onAdd: PropTypes.func,
-  onRemove: PropTypes.func,
-  renderSuggestion: PropTypes.func,
-  trigger: PropTypes.oneOfType([ PropTypes.string, PropTypes.instanceOf(RegExp) ]),
-  markup: PropTypes.string,
-  displayTransform: PropTypes.func,
-  allowSpaceInQuery: PropTypes.bool,
-  isLoading: PropTypes.bool
-}, Mention.defaultProps = {
+Mention.defaultProps = {
   trigger: "@",
   markup: "@[__display__](__id__)",
   displayTransform: function(id, display) {
